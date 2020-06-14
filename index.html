@@ -1,0 +1,82 @@
+<head>
+    <meta charset="utf-8"> 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+                           crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            crossorigin=""></script>
+    <link rel="stylesheet" href="mycss.css">
+    <style type="text/css" media="screen">
+        #mapid { 
+                   height: 300px;
+                   width: 300px;
+               }
+
+        #secondmap { 
+                   height: 300px;
+                   width: 300px;
+               }
+        
+    </style>
+</head>
+<body>
+    <h1>This is a working example for web chartography curse</h1>
+    <p>My name is Roland Hollós</p>
+    <p>The first example will be simply just drawing a simple map</p>
+    <div id="mapid"></div>
+    
+    <p>For the second map I'll draw some basic shapes.</p>
+    <h2>AJAX</h2>
+    <button type="button" id="bordersB" onclick="drawBorders()">draw countryborders</button>
+    <div id="secondmap"></div>
+    <h1>geojson</h1> 
+
+
+    <script charset="utf-8">
+
+        let myMap = L.map('mapid').setView([51,16], 3);
+        let myMap2 = L.map('secondmap').setView([51,16], 3);
+
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: '',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1IjoiaG9sbG9yb2wiLCJhIjoiY2tiYnZ5cmdsMDVleDJ1czV6Z3B6cWF3cCJ9.JMPwZBjoguUIRTz1tfYHtA'
+        }).addTo(myMap);
+
+
+         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+         attribution: '',
+         maxZoom: 18,
+         id: 'mapbox/streets-v11',
+         tileSize: 512,
+         zoomOffset: -1,
+         accessToken: 'pk.eyJ1IjoiaG9sbG9yb2wiLCJhIjoiY2tiYnZ5cmdsMDVleDJ1czV6Z3B6cWF3cCJ9.JMPwZBjoguUIRTz1tfYHtA'
+         }).addTo(myMap2);
+
+       var drawBorders=function(){
+        
+           let xhttp = new XMLHttpRequest();
+           xhttp.onreadystatechange = function() {
+
+               if (this.readyState == 4 && this.status == 200) {
+                   L.geoJSON(JSON.parse(this.responseText)).addTo(myMap2);
+                   
+               }
+           };
+          xhttp.open("GET", "CNTR_BN_60M_2013_3857.geojson", true);
+          xhttp.send();
+      //   fetch('./CNTR_BN_60M_2013_3857.geojson').then(
+      //      function(response){
+
+
+      //        response.json().then(function(data) {
+      //            L.geoJSON(data).addTo(myMap2)
+      //        });
+      //      }
+      //   )
+       }
+
+    </script>
+</body>
