@@ -33,7 +33,6 @@ apiKHTTP.send();
 
 
 var drawBorders=function(){
-	console.log(apiKey)
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -41,7 +40,7 @@ var drawBorders=function(){
         }
     };
 
-    xhttp.open("GET", "data/CNTR_BN_60M_2013_3857.geojson", true);
+    xhttp.open("GET", "CNTR_BN_60M_2013_3857.geojson", true);
     xhttp.send();
     // More modern alternative:
     //   fetch('./CNTR_BN_60M_2013_3857.geojson').then(

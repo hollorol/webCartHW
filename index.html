@@ -16,15 +16,26 @@
     <p>The first example will be simply just drawing a simple map</p>
     <p>Here I've used mapbox api. It provides the basic tile layer for maps. It is based on the <a href="https://www.openstreetmap.org" target="_blank">openstreetmap</a> community project. I am huge fan of that project. I donated some money, and even contributed to the map in Mecsek mountain (I'm from Pécs). </p>
     <p>My original idea was simply to download every data to my server, and let it run till we "reach the tail of the infinity". In the meantime I changed my mind, because I use that server for a lot of projects and I need the dataspace.</p>
+   <p>In order to use my github directory for yourself, you have to have a working webserver, and an api_key.txt file in the root. This approach is really unsafe, because your api_key is available for everyone. One possible solution is to use <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank">Cross-Origin Resource Sharing</a>. I did not have enough time to secure my key this way, therefore I will use a hashed URL and will trust on the people I share this document</p> <p>If you do not have a webserver you can use the python or R to implement it. For the later, starting the server is simply: <code>rserve::httd("directory", port=something_numeric above 1000)</code> For python3+: <a href="https://docs.python.org/3/library/http.server.html" target="_blank">http.server</a> I am using R for the sake of simplicity. For production I suggest NGINX or <a href="https://httpd.apache.org/" target="_blank">APACHE</a></p>
     <h2>Markers and reverse geocoding</h2>
     Here I will handle a single onclick event, place a marker on the map, and do reverse geocoding with the lat lon coordinates to get back country names. I'll use <a href="https://nominatim.openstreetmap.org" target="_blank">the free nominatim api</a> with AJAX. 
 
     <div id="mapid" class ="leafmap"></div>
-    <p>For the second map I'll draw some basic shapes.</p>
-    <h2>AJAX</h2>
+    <h2>GeoJSON</h2>
+    <p>Leaflet provides many possibilities to draw on map. You can add points, polygons,etc. I think the best way to add new object is geoJSON. The main reason is that you can use many scripting tools on it, and even fully-fleged GIS softwares like QGIS, and GRASS. There are many data sources as well. For example I downloaded the European country borders from the <a href="https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units/countries" target="_blank">eurostat website</a>. After downloading I was able to cut regions with qgis. The qgis file is also included in the project data directory.</p>
+    <p>My original idea was to create a map where the country borders transparency is related to the nearby trade-rate of the countries. It is more transparent when the "relationship" is stronger. It could result a very interesting map</p>
+    <p>But, I had a problem. Cannot find any good data for it, althought I did the preparations. The main steps would be:</p>
+
+    <ol>
+        <li>Download geojson file</li>
+        <li>Cut region</li>
+        <li>Create a simple program that can convert csv to json (most of the time the data is provided in csv not json format)</li>
+        <li>Use <a href="https://stedolan.github.io/jq/" target="_blank">jq</a> to add this data as a new attribute </li>
+        <li>Make style dependent on that attribute</li>
+    </ol>
+    <p>Although there are many csv to json converter available (many programed in nodeJS), writing a python program for this purpose was really easy, therefor I did it myself</p>
     <button type="button" id="bordersB" onclick="drawBorders()">draw countryborders</button>
     <div id="secondmap" class="leafmap"></div>
-    <h1>geojson</h1> 
 </body>
 
 <footer>
