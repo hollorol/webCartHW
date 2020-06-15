@@ -41,7 +41,7 @@ var drawBorders=function(){
         }
     };
 
-    xhttp.open("GET", "CNTR_BN_60M_2013_3857.geojson", true);
+    xhttp.open("GET", "data/CNTR_BN_60M_2013_3857.geojson", true);
     xhttp.send();
     // More modern alternative:
     //   fetch('./CNTR_BN_60M_2013_3857.geojson').then(
