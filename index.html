@@ -9,13 +9,21 @@
 
 <body>
     <h1>This is a working example for web chartography curse</h1>
-    <p>My name is Roland Hollós</p>
+    <p>
+     My name is Roland Hollós, and I want to show that I'm comfortable with web technologies. I can use html, css, js, AJAX, leaflet framework, jquery, mathjax, mathml(for firefox or opera browsers), I can manage webservers (This one is running on <a href="https://www.nginx.com/" target="_blank">NGINX</a>). I have some minor knowledge to GIS as well. Here I can use QGIS, I can manipulate geojson files with python/R/jq+bash+awk+sed. After spending 10 years in fully free (as freedom not as free beer) GNU/Linux operating system, I made a decision: if it is possible I'll use only <a href="https://www.fsf.org/about/what-is-free-software" target="_blank">free softwares</a>  
+    </p>
+    <h2>Basics</h2>
     <p>The first example will be simply just drawing a simple map</p>
-    <div id="mapid"></div>
+    <p>Here I've used mapbox api. It provides the basic tile layer for maps. It is based on the <a href="https://www.openstreetmap.org" target="_blank">openstreetmap</a> community project. I am huge fan of that project. I donated some money, and even contributed to the map in Mecsek mountain (I'm from Pécs). </p>
+    <p>My original idea was simply to download every data to my server, and let it run till we "reach the tail of the infinity". In the meantime I changed my mind, because I use that server for a lot of projects and I need the dataspace.</p>
+    <h2>Markers and reverse geocoding</h2>
+    Here I will handle a single onclick event, place a marker on the map, and do reverse geocoding with the lat lon coordinates to get back country names. I'll use <a href="https://nominatim.openstreetmap.org" target="_blank">the free nominatim api</a> with AJAX. 
+
+    <div id="mapid" class ="leafmap"></div>
     <p>For the second map I'll draw some basic shapes.</p>
     <h2>AJAX</h2>
     <button type="button" id="bordersB" onclick="drawBorders()">draw countryborders</button>
-    <div id="secondmap"></div>
+    <div id="secondmap" class="leafmap"></div>
     <h1>geojson</h1> 
 </body>
 

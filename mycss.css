@@ -1,9 +1,5 @@
-#mapid { 
+.leafmap { 
     height: 300px;
     width: 300px;
-}
-
-#secondmap { 
-    height: 300px;
-    width: 300px;
+    margin-top: 20px;
 }
